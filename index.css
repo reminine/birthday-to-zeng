@@ -821,6 +821,7 @@ span {
   }
 
   .candle {
+    z-index: 1;
     position: relative;
     height: 50px;
     width: 12px;
