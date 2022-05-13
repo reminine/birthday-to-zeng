@@ -10,26 +10,12 @@
   <link rel="stylesheet" href="./index.css">
   <style>
     body {
+      width: 100vw;
       overflow: hidden;
-      position: relative;
-    }
-
-    .box {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-    }
-
-    audio {
-      position: absolute;
-      left: 0;
-      top: 0;
+      padding-right: calc(100vw - 100%);
     }
 
     img {
-      position: absolute;
-      left: 0;
-      top: 0;
       width: 100px;
       height: 100px;
       border-radius: 50%;
@@ -103,7 +89,45 @@
   <div class="plate"></div>
 
 
-
+  <script>
+    //--创建页面监听，等待微信端页面加载完毕 触发音频播放
+    document.addEventListener('DOMContentLoaded', function () {
+      function audioAutoPlay() {
+        var audio = document.getElementById('audio');
+        audio.play();
+        document.addEventListener("WeixinJSBridgeReady", function () {
+          audio.play();
+        }, false);
+      }
+      audioAutoPlay();
+    });
+    //--创建触摸监听，当浏览器打开页面时，触摸屏幕触发事件，进行音频播放
+    document.addEventListener('touchstart', function () {
+      function audioAutoPlay() {
+        var audio = document.getElementById('audio');
+        audio.play();
+      }
+      audioAutoPlay();
+    });
+  </script>
+  <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+  <script>
+    function autoPlayVideo() {
+      wx.config({
+        debug: false,
+        appId: "",
+        timestamp: 1,
+        nonceStr: "",
+        signature: "",
+        jsApiList: []
+      });
+      wx.ready(function () {
+        var autoplayVideo = document.getElementById("audio");
+        autoplayVideo.play()
+      })
+    };
+    autoPlayVideo();
+  </script>
 </body>
 
 </html>
